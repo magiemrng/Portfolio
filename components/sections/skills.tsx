@@ -6,7 +6,7 @@ import { SKILLS } from "@/lib/constants";
 
 export function SkillsSection() {
   return (
-    <section className="py-20 px-6">
+    <section id="skills" className="py-20 px-6">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold mb-12 text-center">Skills & Expertise</h2>
         <div className="grid gap-6 md:grid-cols-2">
