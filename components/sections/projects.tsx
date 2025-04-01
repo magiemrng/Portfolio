@@ -1,7 +1,7 @@
 "use client";
 
 import { ProjectCard } from "@/components/project-card";
-import { PROJECTS } from "@/lib/projects";
+import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
 import { Code2, Rocket, Star, Sparkles } from "lucide-react";
 
@@ -33,7 +33,7 @@ export function ProjectsSection() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.name}
               initial={{ opacity: 0, y: 20 }}

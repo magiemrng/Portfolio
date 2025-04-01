@@ -4,8 +4,8 @@ export interface Project {
   gitURL: string;
   liveURL?: string;
   description: string;
-  technologies: string[];
+  technologies: readonly string[];
   image: string;
   year: string;
-  features: string[];
+  features: readonly string[];
 }
