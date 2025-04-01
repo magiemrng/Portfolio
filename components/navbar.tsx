@@ -61,7 +61,7 @@ export function Navbar(): React.ReactElement | null {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             className="ml-4"
           >
             {theme === "light" ? (
