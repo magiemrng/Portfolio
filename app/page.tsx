@@ -1,21 +1,21 @@
-import { Navbar } from "@/components/navbar";
 import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
-import { SkillsSection } from "@/components/sections/skills";
 import { ProjectsSection } from "@/components/sections/projects";
-import { Footer } from "@/components/sections/footer";
+import { SkillsSection } from "@/components/skills-section";
+import ContactSection from "@/components/sections/contact";
+import { Navbar } from "@/components/navbar";
+import Footer from "../components/footer";
 
-export default function Home(): React.ReactElement {
+export default function Home() {
   return (
-    <>
+    <main className="min-h-screen bg-background">
       <Navbar />
-      <main className="min-h-screen bg-background pt-16">
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <Footer /> 
-      </main>
-    </>
+      <HeroSection />
+      <AboutSection />
+      <SkillsSection />
+      <ProjectsSection />
+      <ContactSection />
+      <Footer />
+    </main>
   );
 }

@@ -1,9 +1,11 @@
 export interface Project {
-  id: string;
+  id?: string;
   name: string;
   gitURL: string;
-  liveURL: string;
+  liveURL?: string;
   description: string;
-  technologies: readonly string[];
-  
+  technologies: string[];
+  image: string;
+  year: string;
+  features: string[];
 }

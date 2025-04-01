@@ -1,3 +1,5 @@
+import type { Project } from "@/types/project";
+
 export const PROJECTS = [
   {
     id:"File-Share",
@@ -22,7 +24,6 @@ export const PROJECTS = [
     liveURL: "https://student-utils.vercel.app/",
     description: "Student-Utils is a web application that helps students to manage their daily tasks, assignments, and exams. It also provides a platform for students to interact with each other and share their knowledge.",
     technologies: ["HTML", "CSS", "JavaScript"],
- 
   },
   {
     id: "portfolio-ui",
@@ -31,7 +32,6 @@ export const PROJECTS = [
     liveURL: "https://portfolio-sai-kumar.vercel.app/",
     description: "This is a portfolio website that showcases my projects, skills, and contact information. The website is built using React and Tailwind CSS.",
     technologies: ["React", "Tailwind CSS"],
-   
   },
   {
     id: "air-tag",
@@ -40,7 +40,6 @@ export const PROJECTS = [
     liveURL: "https://air-tag-security.vercel.app/",
     description: "AirTag is a smart emergency alert system that uses Apple AirTags to send emergency alerts to the user's contacts in case of an emergency.",
     technologies: ["React", "Tailwind CSS"],
-    
   },
   {
     id: "todo-app",
@@ -49,7 +48,6 @@ export const PROJECTS = [
     liveURL: "https://to-do-ract-js.vercel.app/",
     description: "ToDu is a to-do list application that allows users to create, edit, and delete tasks.",
     technologies: ["React", "Tailwind CSS", "Firebase"],
-
   },
   {
     id: "weather-app",
@@ -58,7 +56,6 @@ export const PROJECTS = [
     liveURL: "https://weather-forcast-react-js.vercel.app/",
     description: "Weather is a weather forecasting application that provides users with weather information for different locations.",
     technologies: ["React", "Tailwind CSS"],
-  
   },
   {
     id: "bitcoin-prediction",
@@ -67,7 +64,6 @@ export const PROJECTS = [
     liveURL: "https://coin-price-prediction.streamlit.app/",
     description: "The project uses a supervised machine learning approach to predict Bitcoin's price using historical data and features like news sentiment.",
     technologies: ["Python", "Scikit-learn", "Pandas", "Numpy", "Matplotlib"],
-    
   },
   {
     id:"Imagine ",
@@ -77,5 +73,4 @@ export const PROJECTS = [
     description: "Imagine is a web application that allows users to know the details of the image by uploading the image.",
     technologies: ["Next","Gemini API", "Tailwind CSS","Firebase"],
   }
-
 ] as const;
