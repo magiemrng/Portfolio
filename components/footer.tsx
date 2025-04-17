@@ -8,27 +8,22 @@ const socialLinks = [
   {
     name: "GitHub",
     icon: Github,
-    href: "https://github.com/yourusername",
-    color: "hover:text-gray-900 dark:hover:text-white"
+    href: "https://github.com/SAIKUMAR039",
+    color: "hover:text-gray-900 dark:hover:text-white",
   },
   {
     name: "LinkedIn",
     icon: Linkedin,
-    href: "https://linkedin.com/in/yourusername",
-    color: "hover:text-blue-600"
+    href: "https://www.linkedin.com/in/sai-kumar-thota-101764252/",
+    color: "hover:text-blue-600",
   },
-  {
-    name: "Twitter",
-    icon: Twitter,
-    href: "https://twitter.com/yourusername",
-    color: "hover:text-blue-400"
-  },
+
   {
     name: "Email",
     icon: Mail,
-    href: "mailto:your.email@example.com",
-    color: "hover:text-red-500"
-  }
+    href: "mailto:saikumarthota2004@gmail.com",
+    color: "hover:text-red-500",
+  },
 ];
 
 const navigation = {
@@ -36,8 +31,8 @@ const navigation = {
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" }
-  ]
+    { name: "Contact", href: "#contact" },
+  ],
 };
 
 const Footer = () => {
@@ -49,7 +44,8 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Sai Kumar Thota</h3>
             <p className="text-sm text-muted-foreground">
-              Full Stack Developer passionate about creating innovative solutions.
+              Full Stack Developer passionate about creating innovative
+              solutions.
             </p>
           </div>
 
@@ -103,4 +99,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;

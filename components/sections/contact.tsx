@@ -4,7 +4,15 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Github,
+  Linkedin,
+  Twitter,
+} from "lucide-react";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
@@ -51,17 +59,22 @@ export default function ContactSection() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <section id="contact" className="py-20 px-6 bg-secondary/30 relative overflow-hidden">
+    <section
+      id="contact"
+      className="py-20 px-6 bg-secondary/30 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px_32px]" />
       <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/50 to-background" />
-      
+
       <div className="max-w-6xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -90,7 +103,8 @@ export default function ContactSection() {
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold">Contact Information</h3>
               <p className="text-muted-foreground">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+                I'm always open to discussing new projects, creative ideas, or
+                opportunities to be part of your visions.
               </p>
             </div>
 
@@ -101,7 +115,10 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-medium">Email</h4>
-                  <a href="mailto:saikumarthota2004@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                  <a
+                    href="mailto:saikumarthota2004@gmail.com"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
                     saikumarthota2004@gmail.com
                   </a>
                 </div>
@@ -113,7 +130,10 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-medium">Phone</h4>
-                  <a href="tel:+919059081173" className="text-muted-foreground hover:text-primary transition-colors">
+                  <a
+                    href="tel:+919059081173"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
                     +91 90590 81173
                   </a>
                 </div>
@@ -125,9 +145,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-medium">Location</h4>
-                  <p className="text-muted-foreground">
-                    Hyderabad, India
-                  </p>
+                  <p className="text-muted-foreground">Hyderabad, India</p>
                 </div>
               </div>
             </div>
@@ -136,18 +154,21 @@ export default function ContactSection() {
               <h4 className="font-medium">Follow Me</h4>
               <div className="flex gap-4">
                 <Button variant="outline" size="icon" asChild>
-                  <a href="https://github.com/SAIKUMAR039" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://github.com/SAIKUMAR039"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Github className="h-4 w-4" />
                   </a>
                 </Button>
                 <Button variant="outline" size="icon" asChild>
-                  <a href="https://www.linkedin.com/in/sai-kumar-thota-101764252/" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://www.linkedin.com/in/sai-kumar-thota-101764252/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Linkedin className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button variant="outline" size="icon" asChild>
-                  <a href="https://twitter.com/saikumar-thota" target="_blank" rel="noopener noreferrer">
-                    <Twitter className="h-4 w-4" />
                   </a>
                 </Button>
               </div>
