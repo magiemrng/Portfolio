@@ -5,7 +5,7 @@ export const projects = [
     id: "Nerdy-AI-Studio",
     name: "Nerdy AI Studio",
     gitURL: "https://github.com/SAIKUMAR039/Nerdy",
-    liveURL: "hhttps://nerdyn.saikumarthota.live/", 
+    liveURL: "https://nerdyn.saikumarthota.live/", 
     description:
       "A powerful AI-powered content generation platform that offers specialized tools for various content creation needs - from code analysis to professional writing.",
     technologies: [
