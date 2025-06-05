@@ -1,11 +1,37 @@
 import type { Project } from "@/types/project";
 
 export const projects = [
+ {
+    id: "Nerdy-AI-Studio",
+    name: "Nerdy AI Studio",
+    gitURL: "https://github.com/SAIKUMAR039/Nerdy",
+    liveURL: "hhttps://nerdyn.saikumarthota.live/", 
+    description:
+      "A powerful AI-powered content generation platform that offers specialized tools for various content creation needs - from code analysis to professional writing.",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Gemini API",
+      "Stripe",
+      "Vite"
+    ],
+    image: "/projects/nerdy-ai-studio.png",
+    year: "2025",
+    features: [
+      "Multiple specialized AI tools",
+      "Customizable templates",
+      "User authentication",
+      "History tracking",
+      "Premium subscription features",
+    ],
+  },
   {
     id: "Imagine",
     name: "Imagine",
     gitURL: "https://github.com/SAIKUMAR039/Imagine",
-    liveURL: "https://imagine-sai.vercel.app/",
+    liveURL: "https://imagine.saikumarthota.live/",
     description:
       "Imagine is an AI-powered image generation application. Users can create unique images based on text descriptions using advanced AI models.",
     technologies: [
@@ -53,7 +79,7 @@ export const projects = [
     id: "File-Share",
     name: "File Share",
     gitURL: "https://github.com/SAIKUMAR039/FileShare",
-    liveURL: "https://file-shar-e.vercel.app/",
+    liveURL: "https://file-share.saikumarthota.live/",
     description:
       "File Share is a web application that allows users to share files with others. Users can upload files and share them with a unique link.",
     technologies: [

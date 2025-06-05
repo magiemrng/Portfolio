@@ -15,7 +15,7 @@ const experiences = [
   {
     title: "WEB DEVELOPER",
     company: "CODIT TECH SOLUTIONS",
-    period: "2024"
+    period: "2024-2024"
   },
   {
     title: "Undergraduate in Computer Science",
@@ -94,22 +94,13 @@ export function AboutSection() {
                   <div className="w-2 h-2 rounded-full bg-primary mt-2" />
                   <div>
                     <h4 className="font-medium">Full Stack Developer</h4>
-                    <p className="text-sm text-muted-foreground">Tech Company • 2022 - Present</p>
+                    <p className="text-sm text-muted-foreground">CODIT TECH SOLUTIONS</p>
                     <p className="text-sm text-muted-foreground mt-2">
                       Led development of multiple web applications using React, Node.js, and cloud technologies.
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <div>
-                    <h4 className="font-medium">Software Engineer Intern</h4>
-                    <p className="text-sm text-muted-foreground">Startup • 2021 - 2022</p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Developed and maintained web applications using modern JavaScript frameworks.
-                    </p>
-                  </div>
-                </div>
+                
               </div>
             </motion.div>
 

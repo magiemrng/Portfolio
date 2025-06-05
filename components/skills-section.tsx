@@ -23,17 +23,17 @@ const skillCategories = [
   {
     title: "Backend Development",
     icon: Code2,
-    skills: ["Node.js", "Express", "Python", "Django", "REST APIs", "GraphQL"]
+    skills: ["Node.js", "Express", "Python", "Django", "REST APIs", ]
   },
   {
     title: "Database",
     icon: Database,
-    skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Firebase"]
+    skills: ["MongoDB", "PostgreSQL", "MySQL", "Firebase"]
   },
   {
     title: "DevOps & Cloud",
     icon: Cloud,
-    skills: ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Jenkins"]
+    skills: ["AWS", "Docker",  "Git", ]
   },
   {
     title: "Machine Learning",
@@ -48,12 +48,12 @@ const skillCategories = [
   {
     title: "Security",
     icon: Shield,
-    skills: ["OAuth", "JWT", "HTTPS", "XSS Prevention", "CSRF Protection"]
+    skills: ["OAuth", "JWT", "HTTPS", ]
   },
   {
     title: "Version Control",
     icon: GitBranch,
-    skills: ["Git", "GitHub", "GitLab", "Bitbucket", "Branch Management"]
+    skills: ["Git", "GitHub", "GitLab", ]
   }
 ];
 
