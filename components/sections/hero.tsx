@@ -85,7 +85,7 @@ export const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-20">
       {/* Swiss Grid Background */}
       <div className="absolute inset-0 grid-bg opacity-20" />
       
@@ -117,19 +117,19 @@ export const HeroSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="swiss-grid w-full px-6">
-        <div className="col-span-12 lg:col-span-8 lg:col-start-3">
+      <div className="swiss-grid w-full">
+        <div className="col-span-12 lg:col-span-10 lg:col-start-2">
           
           {/* Main Content */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center space-y-12"
+            className="text-center space-y-8 lg:space-y-12"
           >
             
             {/* Profile Section */}
-            <div className="space-y-8">
+            <div className="space-y-6 lg:space-y-8">
               <motion.div 
                 className="relative inline-block"
                 initial={{ scale: 0.8, opacity: 0 }}
@@ -141,30 +141,30 @@ export const HeroSection: React.FC = () => {
                   <img
                     src="https://avatars.githubusercontent.com/u/134082542?v=4"
                     alt="Sai Kumar Thota"
-                    className="relative w-32 h-32 rounded-full border-2 border-background shadow-2xl"
+                    className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-background shadow-2xl"
                   />
-                  <div className="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 rounded-full border-2 border-background animate-pulse" />
+                  <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 bg-green-500 w-4 h-4 sm:w-6 sm:h-6 rounded-full border-2 border-background animate-pulse" />
                 </div>
               </motion.div>
 
               {/* Name and Title */}
-              <div className="space-y-4">
+              <div className="space-y-3 lg:space-y-4">
                 <motion.h1 
-                  className="text-6xl lg:text-8xl font-light tracking-tight swiss-typography"
+                  className="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight swiss-typography"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
                 >
                   <span className="gradient-text font-medium">Sai Kumar</span>
                   <br />
-                  <span className="text-muted-foreground text-4xl lg:text-6xl">Thota</span>
+                  <span className="text-muted-foreground text-2xl sm:text-4xl lg:text-6xl">Thota</span>
                 </motion.h1>
                 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.8 }}
-                  className="text-xl lg:text-2xl text-muted-foreground font-light"
+                  className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-light"
                 >
                   Full Stack Developer & AI Enthusiast
                 </motion.div>
@@ -211,7 +211,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Description */}
             <motion.p 
-              className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light"
+              className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
@@ -223,23 +223,23 @@ export const HeroSection: React.FC = () => {
 
             {/* Action Buttons */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-center px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
             >
               <Button 
                 size="lg" 
-                className="bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 hover-lift px-8 py-6 text-lg"
+                className="bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 hover-lift px-6 lg:px-8 py-4 lg:py-6 text-base lg:text-lg rounded-2xl w-full sm:w-auto"
                 asChild
               >
                 <a href="/assets/Resume.pdf" download>
-                  <FileDown className="mr-2 h-5 w-5" />
+                  <FileDown className="mr-2 h-4 w-4 lg:h-5 lg:w-5" />
                   Download Resume
                 </a>
               </Button>
               
-              <div className="flex gap-4">
+              <div className="flex gap-3 lg:gap-4">
                 {socialLinks.map((link, index) => (
                   <motion.div
                     key={link.label}
@@ -250,11 +250,11 @@ export const HeroSection: React.FC = () => {
                     <Button
                       variant="outline"
                       size="icon"
-                      className={`w-12 h-12 rounded-full border-2 hover-lift transition-all duration-300 ${link.color}`}
+                      className={`w-10 h-10 lg:w-12 lg:h-12 rounded-full border-2 hover-lift transition-all duration-300 ${link.color}`}
                       asChild
                     >
                       <a href={link.href} target="_blank" rel="noopener noreferrer">
-                        <link.icon className="h-5 w-5" />
+                        <link.icon className="h-4 w-4 lg:h-5 lg:w-5" />
                       </a>
                     </Button>
                   </motion.div>
@@ -267,7 +267,7 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.8 }}
-              className="grid grid-cols-3 gap-8 max-w-md mx-auto pt-8"
+              className="grid grid-cols-3 gap-4 lg:gap-8 max-w-sm lg:max-w-md mx-auto pt-6 lg:pt-8"
             >
               {[
                 { number: "10+", label: "Projects" },
@@ -275,8 +275,8 @@ export const HeroSection: React.FC = () => {
                 { number: "5+", label: "Technologies" }
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl lg:text-3xl font-light gradient-text">{stat.number}</div>
-                  <div className="text-sm text-muted-foreground font-light">{stat.label}</div>
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-light gradient-text">{stat.number}</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground font-light">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -286,7 +286,7 @@ export const HeroSection: React.FC = () => {
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.8 }}
@@ -294,10 +294,10 @@ export const HeroSection: React.FC = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="animate-bounce hover:animate-none transition-all duration-300"
+          className="animate-bounce hover:animate-none transition-all duration-300 rounded-full"
           onClick={scrollToAbout}
         >
-          <ChevronDown className="h-6 w-6" />
+          <ChevronDown className="h-5 w-5 lg:h-6 lg:w-6" />
         </Button>
       </motion.div>
     </section>

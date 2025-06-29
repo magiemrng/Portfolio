@@ -40,7 +40,7 @@ export function Navbar(): React.ReactElement | null {
       animate={{ y: 0 }}
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl shadow-lg border-b border-border/50"
+          ? "bg-background/90 backdrop-blur-xl shadow-lg border-b border-border/50"
           : "bg-transparent"
       }`}
     >
@@ -52,10 +52,11 @@ export function Navbar(): React.ReactElement | null {
             href="/" 
             className="flex items-center gap-2 text-xl font-light swiss-typography hover:opacity-80 transition-opacity"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-purple-600 rounded-lg flex items-center justify-center">
-              <Code className="h-4 w-4 text-white" />
+            <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-2xl flex items-center justify-center">
+              <Code className="h-5 w-5 text-white" />
             </div>
-            <span className="gradient-text font-medium">SK</span>
+            <span className="gradient-text font-medium hidden sm:block">Sai Kumar</span>
+            <span className="gradient-text font-medium sm:hidden">SK</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -72,19 +73,19 @@ export function Navbar(): React.ReactElement | null {
                   className="text-sm font-light text-muted-foreground hover:text-foreground transition-colors relative group py-2"
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full rounded-full" />
                 </Link>
               </motion.div>
             ))}
           </nav>
           
           {/* Controls */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="hover:bg-primary/10 transition-colors"
+              className="hover:bg-primary/10 transition-colors rounded-full"
             >
               {theme === "light" ? (
                 <Moon className="h-4 w-4" />
@@ -96,7 +97,7 @@ export function Navbar(): React.ReactElement | null {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden hover:bg-primary/10 transition-colors"
+              className="md:hidden hover:bg-primary/10 transition-colors rounded-full"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
