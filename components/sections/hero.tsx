@@ -348,7 +348,7 @@ export const HeroSection: React.FC = () => {
             <ChevronDown className="h-5 w-5 lg:h-6 lg:w-6 group-hover:text-primary transition-colors" />
           </Button>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
