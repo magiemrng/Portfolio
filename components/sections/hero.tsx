@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, ChevronDown, FileDown, Code, Terminal, Zap, Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { TypewriterEffect, FastTypewriter, AnimatedCodeBlock } from "@/components/ui/typewriter-effect";
+import { TypewriterEffect, UltraFastCodeBlock } from "@/components/ui/typewriter-effect";
 
 const roles = [
   "Full Stack Developer",
@@ -16,11 +16,11 @@ const roles = [
 ];
 
 const codeLines = [
-  { code: "const developer = 'Sai Kumar Thota';", delay: 0.5, highlight: false },
-  { code: "const skills = ['React', 'Next.js', 'AI/ML', 'Node.js'];", delay: 1, highlight: false },
-  { code: "const passion = 'Building innovative solutions';", delay: 1.5, highlight: false },
-  { code: "const status = 'Available for opportunities';", delay: 2, highlight: true },
-  { code: "console.log('Let\\'s build something amazing! 🚀');", delay: 2.5, highlight: false }
+  { code: "const developer = 'Sai Kumar Thota';", delay: 0.3, highlight: false },
+  { code: "const skills = ['React', 'Next.js', 'AI/ML', 'Node.js'];", delay: 0.6, highlight: false },
+  { code: "const passion = 'Building innovative solutions';", delay: 0.9, highlight: false },
+  { code: "const status = 'Available for opportunities';", delay: 1.2, highlight: true },
+  { code: "console.log('Let\\'s build something amazing! 🚀');", delay: 1.5, highlight: false }
 ];
 
 const socialLinks = [
@@ -53,8 +53,8 @@ export const HeroSection: React.FC = () => {
   };
 
   useEffect(() => {
-    const terminalTimer = setTimeout(() => setIsTerminalVisible(true), 800);
-    const elementsTimer = setTimeout(() => setShowFloatingElements(true), 1200);
+    const terminalTimer = setTimeout(() => setIsTerminalVisible(true), 600);
+    const elementsTimer = setTimeout(() => setShowFloatingElements(true), 1000);
     
     return () => {
       clearTimeout(terminalTimer);
@@ -71,20 +71,20 @@ export const HeroSection: React.FC = () => {
       <AnimatePresence>
         {showFloatingElements && (
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(12)].map((_, i) => (
+            {[...Array(15)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute text-xs font-mono text-muted-foreground/20"
+                className="absolute text-xs font-mono text-muted-foreground/30"
                 initial={{ opacity: 0, y: 100, x: Math.random() * 100 }}
                 animate={{ 
-                  opacity: [0, 0.4, 0],
-                  y: [-100, -400],
-                  x: [0, Math.random() * 200 - 100],
+                  opacity: [0, 0.6, 0],
+                  y: [-100, -500],
+                  x: [0, Math.random() * 300 - 150],
                   rotate: [0, Math.random() * 360]
                 }}
                 transition={{
-                  duration: 8 + Math.random() * 4,
-                  delay: i * 0.3,
+                  duration: 6 + Math.random() * 3,
+                  delay: i * 0.2,
                   repeat: Infinity,
                   ease: "linear"
                 }}
@@ -95,8 +95,8 @@ export const HeroSection: React.FC = () => {
               >
                 {[
                   '{ }', '[ ]', '< />', '( )', '=>', '&&', '||', '++', 
-                  'const', 'let', 'function', 'return'
-                ][i]}
+                  'const', 'let', 'function', 'return', 'async', 'await'
+                ][i % 14]}
               </motion.div>
             ))}
           </div>
@@ -201,24 +201,24 @@ export const HeroSection: React.FC = () => {
                 >
                   <TypewriterEffect 
                     words={roles} 
-                    typeSpeed={80}
-                    deleteSpeed={50}
-                    delayBetweenWords={2000}
+                    typeSpeed={60}
+                    deleteSpeed={40}
+                    delayBetweenWords={1500}
                   />
                 </motion.div>
               </div>
             </div>
 
-            {/* Enhanced Terminal Code Block */}
+            {/* Ultra-Fast Terminal Code Block */}
             <AnimatePresence>
               {isTerminalVisible && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.5 }}
                   className="max-w-2xl mx-auto"
                 >
-                  <AnimatedCodeBlock lines={codeLines} />
+                  <UltraFastCodeBlock lines={codeLines} />
                 </motion.div>
               )}
             </AnimatePresence>
