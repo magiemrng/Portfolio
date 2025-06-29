@@ -216,7 +216,7 @@ export const HeroSection: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.95, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="max-w-2xl mx-auto"
+                  className="max-w-3xl mx-auto px-4"
                 >
                   <UltraFastCodeBlock lines={codeLines} />
                 </motion.div>
@@ -348,7 +348,7 @@ export const HeroSection: React.FC = () => {
             <ChevronDown className="h-5 w-5 lg:h-6 lg:w-6 group-hover:text-primary transition-colors" />
           </Button>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };
