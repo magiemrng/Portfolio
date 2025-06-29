@@ -46,13 +46,15 @@ export function TypewriterEffect({
   }, [currentText, isDeleting, currentWordIndex, words, typeSpeed, deleteSpeed, delayBetweenWords]);
 
   return (
-    <div className={`font-light ${className}`}>
+    <div className={`font-mono ${className}`}>
       <span>{currentText}</span>
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity }}
-        className="inline-block w-0.5 h-6 bg-primary ml-1"
-      />
+        className="text-primary"
+      >
+        |
+      </motion.span>
     </div>
   );
 }
@@ -69,53 +71,43 @@ interface UltraFastCodeBlockProps {
 
 export function UltraFastCodeBlock({ lines }: UltraFastCodeBlockProps) {
   const [visibleLines, setVisibleLines] = useState<number>(0);
-  const [currentLineText, setCurrentLineText] = useState<string>('');
-  const [isTyping, setIsTyping] = useState(false);
+  const [typingStates, setTypingStates] = useState<string[]>(new Array(lines.length).fill(''));
 
   useEffect(() => {
-    if (visibleLines < lines.length) {
-      const currentLine = lines[visibleLines];
-      const timer = setTimeout(() => {
-        setIsTyping(true);
-        typeText(currentLine.code, () => {
-          setIsTyping(false);
-          setVisibleLines(prev => prev + 1);
-          setCurrentLineText('');
-        });
-      }, currentLine.delay * 1000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [visibleLines, lines]);
-
-  const typeText = (text: string, onComplete: () => void) => {
-    let index = 0;
-    const typeChar = () => {
-      if (index < text.length) {
-        setCurrentLineText(text.slice(0, index + 1));
-        index++;
-        setTimeout(typeChar, 30); // Very fast typing
-      } else {
-        setTimeout(onComplete, 500); // Pause before next line
+    const timer = setTimeout(() => {
+      if (visibleLines < lines.length) {
+        setVisibleLines(prev => prev + 1);
       }
-    };
-    typeChar();
-  };
+    }, 200);
 
-  const formatCode = (code: string, highlight: boolean = false) => {
-    // Simple syntax highlighting
-    const formatted = code
-      .replace(/(const|let|var)/g, '<span class="syntax-keyword">$1</span>')
-      .replace(/('.*?'|".*?")/g, '<span class="syntax-string">$1</span>')
-      .replace(/(console\.log)/g, '<span class="syntax-function">$1</span>')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=/g, '<span class="syntax-variable">$1</span> =');
+    return () => clearTimeout(timer);
+  }, [visibleLines, lines.length]);
 
-    return (
-      <span 
-        className={highlight ? 'text-green-400' : ''}
-        dangerouslySetInnerHTML={{ __html: formatted }}
-      />
-    );
+  useEffect(() => {
+    if (visibleLines > 0) {
+      const currentLineIndex = visibleLines - 1;
+      const currentLine = lines[currentLineIndex];
+      
+      if (typingStates[currentLineIndex].length < currentLine.code.length) {
+        const timer = setTimeout(() => {
+          setTypingStates(prev => {
+            const newStates = [...prev];
+            newStates[currentLineIndex] = currentLine.code.slice(0, newStates[currentLineIndex].length + 1);
+            return newStates;
+          });
+        }, 30);
+
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [visibleLines, typingStates, lines]);
+
+  const formatCode = (code: string) => {
+    return code
+      .replace(/const|let|var/g, '<span class="syntax-keyword">$&</span>')
+      .replace(/'([^']*)'/g, '<span class="syntax-string">\'$1\'</span>')
+      .replace(/console\.log/g, '<span class="syntax-function">console.log</span>')
+      .replace(/\[([^\]]*)\]/g, '[<span class="syntax-string">$1</span>]');
   };
 
   return (
@@ -126,29 +118,28 @@ export function UltraFastCodeBlock({ lines }: UltraFastCodeBlockProps) {
             key={index}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex items-center"
+            transition={{ duration: 0.3, delay: line.delay }}
+            className={`font-mono text-sm leading-relaxed ${
+              line.highlight ? 'text-green-400' : 'text-gray-300'
+            }`}
           >
             <span className="text-green-400 mr-2">$</span>
-            {formatCode(line.code, line.highlight)}
+            <span 
+              dangerouslySetInnerHTML={{ 
+                __html: formatCode(typingStates[index] || '') 
+              }} 
+            />
+            {typingStates[index] && typingStates[index].length < line.code.length && (
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="text-green-400"
+              >
+                |
+              </motion.span>
+            )}
           </motion.div>
         ))}
-        
-        {isTyping && visibleLines < lines.length && (
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center"
-          >
-            <span className="text-green-400 mr-2">$</span>
-            {formatCode(currentLineText, lines[visibleLines]?.highlight)}
-            <motion.span
-              animate={{ opacity: [1, 0] }}
-              transition={{ duration: 0.5, repeat: Infinity }}
-              className="inline-block w-2 h-5 bg-green-400 ml-1"
-            />
-          </motion.div>
-        )}
       </div>
     </div>
   );
