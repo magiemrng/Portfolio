@@ -1,31 +1,26 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ChevronDown, FileDown, Code, Terminal, Zap, Play } from "lucide-react";
+import { Github, Linkedin, Mail, ChevronDown, FileDown, Code, Terminal, Zap, Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { TypewriterEffect, FastTypewriter, AnimatedCodeBlock } from "@/components/ui/typewriter-effect";
 
-const codeSnippets = [
-  { 
-    code: "const developer = 'Sai Kumar';", 
-    language: "javascript",
-    delay: 0 
-  },
-  { 
-    code: "const skills = ['React', 'Next.js', 'AI/ML'];", 
-    language: "javascript",
-    delay: 1 
-  },
-  { 
-    code: "const passion = 'Building the future';", 
-    language: "javascript",
-    delay: 2 
-  },
-  { 
-    code: "console.log('Hello World! 👋');", 
-    language: "javascript",
-    delay: 3 
-  }
+const roles = [
+  "Full Stack Developer",
+  "React Specialist", 
+  "AI/ML Engineer",
+  "UI/UX Designer",
+  "Problem Solver",
+  "Tech Innovator"
+];
+
+const codeLines = [
+  { code: "const developer = 'Sai Kumar Thota';", delay: 0.5, highlight: false },
+  { code: "const skills = ['React', 'Next.js', 'AI/ML', 'Node.js'];", delay: 1, highlight: false },
+  { code: "const passion = 'Building innovative solutions';", delay: 1.5, highlight: false },
+  { code: "const status = 'Available for opportunities';", delay: 2, highlight: true },
+  { code: "console.log('Let\\'s build something amazing! 🚀');", delay: 2.5, highlight: false }
 ];
 
 const socialLinks = [
@@ -49,72 +44,91 @@ const socialLinks = [
   }
 ];
 
-const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (currentIndex < text.length) {
-        setDisplayText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }
-    }, 50 + delay * 1000);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex, text, delay]);
-
-  return (
-    <span className="font-mono text-sm">
-      {displayText}
-      <span className="animate-pulse">|</span>
-    </span>
-  );
-};
-
 export const HeroSection: React.FC = () => {
   const [isTerminalVisible, setIsTerminalVisible] = useState(false);
+  const [showFloatingElements, setShowFloatingElements] = useState(false);
 
   const scrollToAbout = (): void => {
     document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsTerminalVisible(true), 1000);
-    return () => clearTimeout(timer);
+    const terminalTimer = setTimeout(() => setIsTerminalVisible(true), 800);
+    const elementsTimer = setTimeout(() => setShowFloatingElements(true), 1200);
+    
+    return () => {
+      clearTimeout(terminalTimer);
+      clearTimeout(elementsTimer);
+    };
   }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-20">
-      {/* Swiss Grid Background */}
+      {/* Enhanced Background */}
       <div className="absolute inset-0 grid-bg opacity-20" />
       
-      {/* Floating Code Elements */}
+      {/* Animated Floating Code Elements */}
+      <AnimatePresence>
+        {showFloatingElements && (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(12)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute text-xs font-mono text-muted-foreground/20"
+                initial={{ opacity: 0, y: 100, x: Math.random() * 100 }}
+                animate={{ 
+                  opacity: [0, 0.4, 0],
+                  y: [-100, -400],
+                  x: [0, Math.random() * 200 - 100],
+                  rotate: [0, Math.random() * 360]
+                }}
+                transition={{
+                  duration: 8 + Math.random() * 4,
+                  delay: i * 0.3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: '100%'
+                }}
+              >
+                {[
+                  '{ }', '[ ]', '< />', '( )', '=>', '&&', '||', '++', 
+                  'const', 'let', 'function', 'return'
+                ][i]}
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-xs font-mono text-muted-foreground/10"
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ 
-              opacity: [0, 0.3, 0],
-              y: [-100, -300],
-              x: [0, Math.random() * 100 - 50]
-            }}
-            transition={{
-              duration: 12,
-              delay: i * 1.5,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: '100%'
-            }}
-          >
-            {`<${['div', 'span', 'section', 'article', 'header', 'main', 'footer', 'nav'][i]} />`}
-          </motion.div>
-        ))}
+        <motion.div
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            x: [0, -100, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
+        />
       </div>
 
       <div className="swiss-grid w-full">
@@ -137,13 +151,32 @@ export const HeroSection: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse blur-sm" />
+                  <motion.div 
+                    className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full opacity-75 blur-sm"
+                    animate={{
+                      rotate: [0, 360],
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  />
                   <img
                     src="https://avatars.githubusercontent.com/u/134082542?v=4"
                     alt="Sai Kumar Thota"
                     className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-background shadow-2xl"
                   />
-                  <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 bg-green-500 w-4 h-4 sm:w-6 sm:h-6 rounded-full border-2 border-background animate-pulse" />
+                  <motion.div 
+                    className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 bg-green-500 w-4 h-4 sm:w-6 sm:h-6 rounded-full border-2 border-background"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                    }}
+                  />
                 </div>
               </motion.div>
 
@@ -166,12 +199,17 @@ export const HeroSection: React.FC = () => {
                   transition={{ delay: 0.6, duration: 0.8 }}
                   className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-light"
                 >
-                  Full Stack Developer & AI Enthusiast
+                  <TypewriterEffect 
+                    words={roles} 
+                    typeSpeed={80}
+                    deleteSpeed={50}
+                    delayBetweenWords={2000}
+                  />
                 </motion.div>
               </div>
             </div>
 
-            {/* Terminal Code Block */}
+            {/* Enhanced Terminal Code Block */}
             <AnimatePresence>
               {isTerminalVisible && (
                 <motion.div
@@ -180,64 +218,58 @@ export const HeroSection: React.FC = () => {
                   transition={{ duration: 0.6 }}
                   className="max-w-2xl mx-auto"
                 >
-                  <div className="terminal glass hover-lift">
-                    <div className="terminal-content space-y-2">
-                      {codeSnippets.map((snippet, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: snippet.delay * 0.5, duration: 0.4 }}
-                          className="flex items-center space-x-2"
-                        >
-                          <span className="text-green-400">$</span>
-                          <TypewriterText text={snippet.code} delay={snippet.delay} />
-                        </motion.div>
-                      ))}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 4, duration: 0.4 }}
-                        className="flex items-center space-x-2 text-green-400"
-                      >
-                        <Play className="w-3 h-3" />
-                        <span className="text-sm">Ready to build amazing things...</span>
-                      </motion.div>
-                    </div>
-                  </div>
+                  <AnimatedCodeBlock lines={codeLines} />
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {/* Description */}
-            <motion.p 
-              className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light px-4"
+            {/* Enhanced Description */}
+            <motion.div
+              className="space-y-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              Crafting digital experiences with clean code, innovative solutions, 
-              and a passion for emerging technologies. Specialized in React, Next.js, 
-              and AI-powered applications.
-            </motion.p>
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light px-4">
+                Crafting digital experiences with <span className="gradient-text font-medium">clean code</span>, 
+                <span className="gradient-text font-medium"> innovative solutions</span>, and a passion for 
+                <span className="gradient-text font-medium"> emerging technologies</span>.
+              </p>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+                className="flex items-center justify-center gap-2 text-sm text-muted-foreground"
+              >
+                <Sparkles className="h-4 w-4 text-primary" />
+                <span>Specialized in React, Next.js & AI-powered applications</span>
+                <Sparkles className="h-4 w-4 text-primary" />
+              </motion.div>
+            </motion.div>
 
-            {/* Action Buttons */}
+            {/* Enhanced Action Buttons */}
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-center px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
             >
-              <Button 
-                size="lg" 
-                className="bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 hover-lift px-6 lg:px-8 py-4 lg:py-6 text-base lg:text-lg rounded-2xl w-full sm:w-auto"
-                asChild
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <a href="/assets/Resume.pdf" download>
-                  <FileDown className="mr-2 h-4 w-4 lg:h-5 lg:w-5" />
-                  Download Resume
-                </a>
-              </Button>
+                <Button 
+                  size="lg" 
+                  className="bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 hover-lift px-6 lg:px-8 py-4 lg:py-6 text-base lg:text-lg rounded-2xl w-full sm:w-auto group"
+                  asChild
+                >
+                  <a href="/assets/Resume.pdf" download>
+                    <FileDown className="mr-2 h-4 w-4 lg:h-5 lg:w-5 group-hover:animate-bounce" />
+                    Download Resume
+                  </a>
+                </Button>
+              </motion.div>
               
               <div className="flex gap-3 lg:gap-4">
                 {socialLinks.map((link, index) => (
@@ -246,6 +278,8 @@ export const HeroSection: React.FC = () => {
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1.2 + index * 0.1, duration: 0.5 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Button
                       variant="outline"
@@ -262,7 +296,7 @@ export const HeroSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Stats */}
+            {/* Enhanced Stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -270,35 +304,50 @@ export const HeroSection: React.FC = () => {
               className="grid grid-cols-3 gap-4 lg:gap-8 max-w-sm lg:max-w-md mx-auto pt-6 lg:pt-8"
             >
               {[
-                { number: "10+", label: "Projects" },
-                { number: "2+", label: "Years" },
-                { number: "5+", label: "Technologies" }
+                { number: "10+", label: "Projects", icon: Code },
+                { number: "2+", label: "Years", icon: Terminal },
+                { number: "5+", label: "Technologies", icon: Zap }
               ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-light gradient-text">{stat.number}</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground font-light">{stat.label}</div>
-                </div>
+                <motion.div 
+                  key={index} 
+                  className="text-center group"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.6 + index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="flex flex-col items-center space-y-2">
+                    <stat.icon className="h-5 w-5 text-primary group-hover:scale-110 transition-transform" />
+                    <div className="text-xl sm:text-2xl lg:text-3xl font-light gradient-text">{stat.number}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground font-light">{stat.label}</div>
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Enhanced Scroll Indicator */}
       <motion.div
         className="absolute bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.8 }}
       >
-        <Button
-          variant="ghost"
-          size="icon"
-          className="animate-bounce hover:animate-none transition-all duration-300 rounded-full"
-          onClick={scrollToAbout}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
         >
-          <ChevronDown className="h-5 w-5 lg:h-6 lg:w-6" />
-        </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hover:bg-primary/10 transition-all duration-300 rounded-full group"
+            onClick={scrollToAbout}
+          >
+            <ChevronDown className="h-5 w-5 lg:h-6 lg:w-6 group-hover:text-primary transition-colors" />
+          </Button>
+        </motion.div>
       </motion.div>
     </section>
   );
