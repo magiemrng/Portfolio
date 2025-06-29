@@ -11,13 +11,13 @@ interface TypewriterEffectProps {
   className?: string;
 }
 
-export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
-  words,
-  typeSpeed = 100,
-  deleteSpeed = 50,
+export function TypewriterEffect({ 
+  words, 
+  typeSpeed = 100, 
+  deleteSpeed = 50, 
   delayBetweenWords = 2000,
-  className = ""
-}) => {
+  className = "" 
+}: TypewriterEffectProps) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -46,18 +46,16 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
   }, [currentText, isDeleting, currentWordIndex, words, typeSpeed, deleteSpeed, delayBetweenWords]);
 
   return (
-    <div className={`font-mono ${className}`}>
+    <div className={`font-light ${className}`}>
       <span>{currentText}</span>
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity }}
-        className="text-primary"
-      >
-        |
-      </motion.span>
+        className="inline-block w-0.5 h-6 bg-primary ml-1"
+      />
     </div>
   );
-};
+}
 
 interface CodeLine {
   code: string;
@@ -69,101 +67,89 @@ interface UltraFastCodeBlockProps {
   lines: CodeLine[];
 }
 
-export const UltraFastCodeBlock: React.FC<UltraFastCodeBlockProps> = ({ lines }) => {
+export function UltraFastCodeBlock({ lines }: UltraFastCodeBlockProps) {
   const [visibleLines, setVisibleLines] = useState<number>(0);
-  const [typingStates, setTypingStates] = useState<{ [key: number]: string }>({});
+  const [currentLineText, setCurrentLineText] = useState<string>('');
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
-    const showNextLine = (lineIndex: number) => {
-      if (lineIndex >= lines.length) return;
+    if (visibleLines < lines.length) {
+      const currentLine = lines[visibleLines];
+      const timer = setTimeout(() => {
+        setIsTyping(true);
+        typeText(currentLine.code, () => {
+          setIsTyping(false);
+          setVisibleLines(prev => prev + 1);
+          setCurrentLineText('');
+        });
+      }, currentLine.delay * 1000);
 
-      setVisibleLines(lineIndex + 1);
-      
-      const line = lines[lineIndex];
-      let currentIndex = 0;
-      
-      const typeCharacter = () => {
-        if (currentIndex <= line.code.length) {
-          setTypingStates(prev => ({
-            ...prev,
-            [lineIndex]: line.code.slice(0, currentIndex)
-          }));
-          currentIndex++;
-          
-          if (currentIndex <= line.code.length) {
-            setTimeout(typeCharacter, 8); // Ultra-fast typing: 8ms per character
-          } else {
-            // Line complete, show next line after short delay
-            setTimeout(() => showNextLine(lineIndex + 1), 150);
-          }
-        }
-      };
+      return () => clearTimeout(timer);
+    }
+  }, [visibleLines, lines]);
 
-      setTimeout(typeCharacter, line.delay * 1000);
+  const typeText = (text: string, onComplete: () => void) => {
+    let index = 0;
+    const typeChar = () => {
+      if (index < text.length) {
+        setCurrentLineText(text.slice(0, index + 1));
+        index++;
+        setTimeout(typeChar, 30); // Very fast typing
+      } else {
+        setTimeout(onComplete, 500); // Pause before next line
+      }
     };
+    typeChar();
+  };
 
-    showNextLine(0);
-  }, [lines]);
+  const formatCode = (code: string, highlight: boolean = false) => {
+    // Simple syntax highlighting
+    const formatted = code
+      .replace(/(const|let|var)/g, '<span class="syntax-keyword">$1</span>')
+      .replace(/('.*?'|".*?")/g, '<span class="syntax-string">$1</span>')
+      .replace(/(console\.log)/g, '<span class="syntax-function">$1</span>')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=/g, '<span class="syntax-variable">$1</span> =');
 
-  const formatCode = (code: string, isComplete: boolean) => {
-    if (!isComplete) return code;
-
-    return code.replace(
-      /(const|let|var|console\.log|function|return|async|await)/g,
-      '<span class="syntax-keyword">$1</span>'
-    ).replace(
-      /('.*?'|".*?")/g,
-      '<span class="syntax-string">$1</span>'
-    ).replace(
-      /(\w+)(?=\s*=)/g,
-      '<span class="syntax-variable">$1</span>'
+    return (
+      <span 
+        className={highlight ? 'text-green-400' : ''}
+        dangerouslySetInnerHTML={{ __html: formatted }}
+      />
     );
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="terminal max-w-2xl mx-auto"
-    >
-      <div className="terminal-content">
-        <div className="space-y-1 font-mono text-sm">
-          {lines.slice(0, visibleLines).map((line, index) => {
-            const currentText = typingStates[index] || '';
-            const isComplete = currentText.length === line.code.length;
-            
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className={`flex items-start gap-3 ${line.highlight ? 'bg-primary/10 -mx-2 px-2 py-1 rounded' : ''}`}
-              >
-                <span className="text-green-400 select-none flex-shrink-0">$</span>
-                <div className="flex-1 min-w-0">
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: formatCode(currentText, isComplete)
-                    }}
-                    className="break-all"
-                  />
-                  {!isComplete && (
-                    <motion.span
-                      animate={{ opacity: [1, 0] }}
-                      transition={{ duration: 0.5, repeat: Infinity }}
-                      className="text-green-400"
-                    >
-                      ▋
-                    </motion.span>
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+    <div className="terminal">
+      <div className="terminal-content space-y-2">
+        {lines.slice(0, visibleLines).map((line, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center"
+          >
+            <span className="text-green-400 mr-2">$</span>
+            {formatCode(line.code, line.highlight)}
+          </motion.div>
+        ))}
+        
+        {isTyping && visibleLines < lines.length && (
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center"
+          >
+            <span className="text-green-400 mr-2">$</span>
+            {formatCode(currentLineText, lines[visibleLines]?.highlight)}
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.5, repeat: Infinity }}
+              className="inline-block w-2 h-5 bg-green-400 ml-1"
+            />
+          </motion.div>
+        )}
       </div>
-    </motion.div>
+    </div>
   );
-};
+}
